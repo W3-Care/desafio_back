@@ -31,7 +31,7 @@ O **Médico** finalizará a sala de chat desconectando o **Paciente** atual e ch
 
 
 ## REQUISITOS
-1. A fila deve ser persistida, ou seja, deve ser gerenciada por um banco de dados
+1. A fila deve ser persistida, ou seja, deve ser gerenciada usando um bd
 2. Deverá existir um CRUD de usuários
 3. Utilize Docker
 4. Beba água
