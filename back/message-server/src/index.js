@@ -10,7 +10,14 @@ const io = socketIO(server);
 const port = process.env.PORT || 3000;
 
 io.on('connection', (socket) => {
-    console.log('user connected');
+
+  let previousId;
+  socket.join(1);
+  console.log('user connected');
+   socket.on('new-message', (message) => {
+        console.log(message);
+        io.to(1).emit('new-message', message);
+      });
 });
 
 server.listen(port, () => {
