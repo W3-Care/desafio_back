@@ -1,0 +1,21 @@
+<h4 class="mb-3">Autenticação</h4>
+<form class="needs-validation" novalidate>
+  <div class="row">
+  <div class="col-12">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="you@example.com" [(ngModel)]="email" name="email">
+    <div class="invalid-feedback">
+      E-mail é obrigatório
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label for="email">Senha</label>
+    <input type="email" class="form-control" id="email" placeholder="you@example.com" [(ngModel)]="password" name="password">
+    <div class="invalid-feedback">
+      Senha é obrigatório
+    </div>
+  </div>
+  </div>
+  <hr class="mb-4">
+  <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="auth()">Autenticar</button>

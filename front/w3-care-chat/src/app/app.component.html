@@ -1,4 +1,8 @@
-<div *ngFor="let message of messageList">
+<!-- <main>
+  <router-outlet></router-outlet>
+</main> -->
+
+<!-- <div *ngFor="let message of messageList">
 <p>
 <strong>
   {{message.id}}: 
@@ -7,4 +11,77 @@
 </div>
 
 <input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" />
-<button (click)="sendMessage()">Send Message</button>
+<button (click)="sendMessage()">Send Message</button> -->
+
+
+<!-- <div class="mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--scroll">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout__title">W3.care chat</span>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout__title">Material Design Lite</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" routerLink="/user/auth">Autenticar</a>
+      <a class="mdl-navigation__link" routerLink="/user/new">Novo Cadastro</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div>
+
+
+      <!-- Square card -- >  
+    <router-outlet>        
+    </router-outlet>
+    </div>
+  </main>
+</div> -->
+
+
+
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4 logo" src="https://w3.care/assets/images/w3care-logo-4.svg">
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-1 mb-4">
+      
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <a routerLink="user/auth">
+              <h6 class="my-0">Autenticar</h6>
+              <small class="text-muted">Entre com seu usuário e senha</small>
+            </a>
+          </div>
+        </li>
+        
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <a routerLink="user/new">
+              <h6 class="my-0">Novo Cadastro</h6>
+              <small class="text-muted">Cadastre-se para ser atendido</small>
+            </a>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-8 order-md-2">
+
+<router-outlet></router-outlet>
+</div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2017-2018 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
