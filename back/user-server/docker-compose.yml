@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  postgres-compose:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: source-it-api
+
+    ports:
+      - "15432:5432"
+
+    networks:
+      - postgres-compose-network
+      
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "123456"
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-compose
+    networks:
+      - postgres-compose-network
+      
+  # source2it-api:
+  #   image: bernardolobato/source2itapi:latest
+  #   environment:
+  #     SPRING_DATASOURCE_URL:  "jdbc:postgresql://postgres-compose:5432/source-it-api"
+  #     SPRING_DATASOURCE_USERNAME: "postgres"
+  #     SPRING_DATASOURCE_PASSWORD: "123456"
+  #     TZ: America/Sao_Paulo
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - postgres-compose
+  #     - pgadmin-compose
+  #   networks:
+  #     - postgres-compose-network
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
+
+volumes:
+  postgres:

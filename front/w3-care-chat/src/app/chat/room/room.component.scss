@@ -25,12 +25,16 @@ img{ max-width:100%;}
        width: 80%;
 }
   .outgoing_msg{
-       overflow:hidden; 
+    //    overflow:hidden; 
        margin-left: 45%;
        width: 80%;
        right:0;
     }
-  .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+  .type_msg {
+      border-top: 1px solid #c4c4c4;
+      position: relative;
+      margin-bottom: 2rem;
+    }
   .input_msg_write input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;

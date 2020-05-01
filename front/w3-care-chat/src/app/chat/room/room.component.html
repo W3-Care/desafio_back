@@ -27,16 +27,18 @@
                     <p>{{message.body}} {{message.user.id !== currentUser.id}}</p>
                 </div>
               </div>
-            <div class="type_msg">
-              <div class="input_msg_write">
-                <input type="text"  [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" class="write_msg" placeholder="Digite sua mensagem" />
-                <button  (click)="sendMessage()" class="btn btn-sm btn-success" type="button">Enviar</button>
-              </div>
             </div>
-          </div>
         </div>
+                    <div class="type_msg">
+                      <div class="input_msg_write">
+                        <input type="text"  [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" class="write_msg" placeholder="Digite sua mensagem" />
+                        <button  (click)="sendMessage()" class="btn btn-sm btn-success" type="button">Enviar</button>
+                      </div>
+                    </div>
       </div>
   </div>
+  <button class="btn btn-danger btn-lg btn-block" type="submit" (click)="finish()">Encerrar atendimento</button>
+
 </div>
 
 

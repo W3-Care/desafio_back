@@ -68,4 +68,8 @@ export class RoomComponent implements OnInit {
     this.newMessage = '';
   }
 
+  finish() {
+   
+  }
+
 }
