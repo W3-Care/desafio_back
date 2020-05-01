@@ -1,0 +1,48 @@
+.messaging { padding: 0 0 50px 0;}
+.inbox_msg {
+    clear: both;
+    overflow: hidden;
+  }
+  .mesgs {
+    float: left;
+    padding: 30px 15px 0 25px;
+    width: 100%;
+  }
+  .msg_history {
+    height: 516px;
+    overflow-y: auto;
+  }
+  .incoming_msg_img {
+    display: inline-block;
+    width: 6%;
+  }
+
+  .container{max-width:1170px; margin:auto;}
+img{ max-width:100%;}
+
+
+  .received_msg {
+       width: 80%;
+}
+  .outgoing_msg{
+       overflow:hidden; 
+       margin-left: 45%;
+       width: 80%;
+       right:0;
+    }
+  .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+  .input_msg_write input {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #4c4c4c;
+    font-size: 15px;
+    min-height: 33px;
+    width: 100%;
+  }
+  
+  .btn-sm {
+      width: 100px;
+      position: absolute;
+      right: 0;
+      height: 100%;
+  }
