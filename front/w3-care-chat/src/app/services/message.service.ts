@@ -27,7 +27,6 @@ public createAndJoinRoom(room) {
   return Observable.create((observer) => {
     this.socket.on('new-room', (message) => {
       this.socket.emit('join-room', room);
-      console.log(message)
         observer.next(message);
     });
 });
@@ -35,14 +34,38 @@ public createAndJoinRoom(room) {
 
 public waitAndJoinRoom(room) {
   this.socket.emit('wait-room', room);
+  
   return Observable.create((observer) => {
     this.socket.on('new-room', (message) => {
-      console.log(message)
       if(message === this.userService.currentUserValue.id) {
         this.socket.emit('join-room', room);
         observer.next(message);
       }
     });
 });
+}
+
+
+public waitForCloseRoom(room) {
+  return Observable.create((observer) => {
+    this.socket.on('close-room', (message) => {
+      if(message === room) {
+        observer.next(message);
+      }
+    });
+});
+}
+
+public closeRoom(roomId) {
+  this.socket.emit('close-room', roomId);
+  return Observable.create((observer) => {
+//     this.socket.on('new-room', (message) => {
+//       console.log(message)
+//       if(message === this.userService.currentUserValue.id) {
+//         this.socket.emit('join-room', room);
+//         observer.next(message);
+//       }
+//     });
+ });
 }
 }

@@ -17,36 +17,42 @@ export class RoomComponent implements OnInit {
   messageList: string[] = [];
   newMessage: string;
   roomId: number;
+  queue: any;
+  infoMessage: String;
+
   constructor(private service: UserService, private queueService: QueueService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.service.currentUserModel.subscribe(u=>{
-      this.currentUser = u;
-      if (this.currentUser.type === 'PATIENT') {
-        this.registerAsPatient();
-      }
-    });
+    this.currentUser = this.service.currentUserValue;
+    this.registerAsPatient();
   }
 
   startNewRoom(): void {
+    this.infoMessage = "";
     this.queueService.pullNewRoom()
     .subscribe(queue=>{
+      this.queue = queue.body;
       this.messageService.createAndJoinRoom(queue.body.patient.id).subscribe(message=>{
-        console.log(message)
         this.roomId = message;
         this.status = 'IN_EXECUTION';
         this.messageService
       .getMessages()
       .subscribe((message: string) => {
-        console.log(message);
         this.messageList.push(message);
       });
       })
+      this.messageService.waitForCloseRoom(queue.body.patient.id).subscribe(data=>{
+        this.status = 'DONE';
+      });
+    },
+    error=>{
+      if(error.status === 404) {
+        this.infoMessage = "Não há nenhum paciente na fila"
+      }
     })
   }
 
   registerAsPatient(): void {
-    console.log(this.currentUser.id)
     this.queueService.registerAsPatient()
     .subscribe(()=>{
       this.messageService.waitAndJoinRoom(this.currentUser.id).subscribe(message=>{
@@ -55,9 +61,12 @@ export class RoomComponent implements OnInit {
         this.messageService
       .getMessages()
       .subscribe((message: string) => {
-        console.log(message);
         this.messageList.push(message);
       });
+      });
+
+      this.messageService.waitForCloseRoom(this.currentUser.id).subscribe(data=>{
+        this.status = 'DONE';
       });
     });
 ;
@@ -66,10 +75,13 @@ export class RoomComponent implements OnInit {
   sendMessage() {
     this.messageService.sendMessage(new Message(this.currentUser, this.newMessage, this.roomId));
     this.newMessage = '';
+    this.status = 'DONE';
   }
 
   finish() {
-   
+    this.queueService.finishMedicalCare(this.queue.id).subscribe((data)=>{
+      this.messageService.closeRoom(this.roomId);
+    })
   }
 
 }

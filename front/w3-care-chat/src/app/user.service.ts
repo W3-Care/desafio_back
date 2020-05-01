@@ -22,13 +22,9 @@ export class UserService {
     return this.http.post<any>(`${environment.api}/api/autentica/`, {email: email, password: password}, {observe: 'response' as 'body'})
     .pipe(
       map(jwt => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      console.log(jwt)
       const decodedJwt = jwt_decode(jwt.headers.get('authorization'));
-      console.log(decodedJwt);
       const user: UserModel = JSON.parse(decodedJwt.details);
       user.token = jwt.headers.get('authorization')
-      console.log(user)
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserModelSubject.next(user);
       return user;

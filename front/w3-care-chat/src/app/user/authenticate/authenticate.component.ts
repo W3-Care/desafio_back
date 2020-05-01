@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AuthenticateComponent implements OnInit {
   loading= false;
   constructor(private service: UserService, private router: Router) { }
-  email: string = 'bernardo@patient.com';
+  email: string = 'paciente@paciente.com';
   password: string = '123456';
   error = '';
 

@@ -1,9 +1,12 @@
+<div class="alert alert-success" role="alert" *ngIf="successMessage">{{successMessage}}</div>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+
 <h4 class="mb-3">Novo Cadastro</h4>
 <form class="needs-validation" novalidate>
   <div class="row">
     <div class="col-md-12 mb-3">
       <label for="firstName">Nome</label>
-      <input type="text" class="form-control" id="firstName" placeholder="" value="" required [(ngModel)]="user.nome" name="nome">
+      <input type="text" class="form-control" id="firstName" placeholder="" value="" required [(ngModel)]="user.name" name="nome">
       <div class="invalid-feedback">
         Nome é Obrigatório
       </div>
@@ -12,7 +15,7 @@
 
   <div class="mb-3">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="you@example.com" [(ngModel)]="user.email" name="email">
+    <input type="email" class="form-control" id="email" placeholder="seu@email.com" [(ngModel)]="user.email" name="email">
     <div class="invalid-feedback">
       E-mail é obrigatório
     </div>
@@ -20,7 +23,7 @@
 
   <div class="mb-3">
     <label for="email">Senha</label>
-    <input type="email" class="form-control" id="email" placeholder="you@example.com" [(ngModel)]="user.password" name="password">
+    <input type="password" class="form-control" [(ngModel)]="user.password" name="password">
     <div class="invalid-feedback">
       Senha é obrigatório
     </div>
@@ -29,7 +32,7 @@
   <div class="row">
     <div class="col-md-5 mb-3">
       <label for="country">Tipo</label>
-      <select class="custom-select d-block w-100" id="country" required [(ngModel)]="user.type" name="type">
+      <select class="custom-select d-block w-100" id="type" required [(ngModel)]="user.type" name="type">
         <option value="DOCTOR">Médico</option>
         <option value="PATIENT">Paciente</option>
       </select>

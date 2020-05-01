@@ -29,4 +29,9 @@ export class QueueService {
     this.currentUser = this.userService.currentUserValue;
     return this.http.post<any>(`${environment.api}/api/queues/`, {patientId: this.currentUser.id}, {observe: 'response' as 'body'});
   }
+
+  finishMedicalCare(queueId) {
+    this.currentUser = this.userService.currentUserValue;
+    return this.http.post<any>(`${environment.api}/api/queues/finish`, {id: queueId, patientId: this.currentUser.id}, {observe: 'response' as 'body'});
+  }
 }

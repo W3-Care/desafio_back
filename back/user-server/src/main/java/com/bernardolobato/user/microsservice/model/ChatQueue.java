@@ -1,5 +1,6 @@
  package com.bernardolobato.user.microsservice.model;
 
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,6 +34,9 @@ public class ChatQueue {
     @JoinColumn(name="patient_id")
     @Setter
     User patient;
+
+    Date startDate;
+    Date endDate;
 
     @Setter
     @Enumerated(EnumType.STRING)

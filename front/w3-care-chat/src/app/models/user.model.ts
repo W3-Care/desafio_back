@@ -1,7 +1,7 @@
 export class UserModel {    
     id;
-    nome;
-    dataNascimento;
+    name;
+    birthday;
     email;    
     password;
     type;

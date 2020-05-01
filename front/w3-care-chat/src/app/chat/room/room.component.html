@@ -1,6 +1,6 @@
 <div class="container">
-<h3 class=" text-center">Paciente X</h3>
-
+<h3 class=" text-center">{{currentUser.name}}</h3>
+<div class="alert alert-info" *ngIf="infoMessage">{{infoMessage}}</div>
 <div *ngIf="currentUser.type === 'DOCTOR' && status !== 'IN_EXECUTION'">
     <button class="btn btn-success btn-lg btn-block" type="submit" (click)="startNewRoom()">Iniciar Atendimento</button>
 </div>
@@ -42,8 +42,15 @@
 </div>
 
 
-<div *ngIf="currentUser.type === 'PATIENT' && status !== 'IN_EXECUTION'">
-    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="registerAsPatient()">Entrar na fila de atendimento</button>
+<div *ngIf="currentUser.type === 'PATIENT' && status === 'WAITING'">
+    <p style="text-align: center;">Aguarde... você está na fila de atendimento...<br />
+      <img src="assets/loading.gif"/>
+    </p>
+</div>
+
+<div *ngIf="currentUser.type === 'PATIENT' && status === 'DONE'">
+  <p style="text-align: center;">Atendimento finalizado. Caso queira um novo atendimento, faça seu login novamente.<br />
+  </p>
 </div>
 
 

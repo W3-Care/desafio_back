@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class QueueForm {
+    Long id;
     Long patientId;
     Long doctorId;
     

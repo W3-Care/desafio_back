@@ -14,6 +14,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class UserForm {
+    @NotBlank
     String name;
     @JsonFormat
           (shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")          

@@ -25,6 +25,17 @@ io.on('connection', (socket) => {
       socket.join(room);
       console.log('Joined Room ', room);
     });
+
+    socket.on('close-room', (room) => {
+      io.of('/').in(room).clients((error, socketIds) => {
+        if (error) throw error;      
+        socketIds.forEach(socketId => io.sockets.sockets[socketId].leave(room));      
+      });
+      io.emit('close-room', room);
+      console.log('Close Room ', room);
+    });
+
+
 });
 
 server.listen(port, () => {

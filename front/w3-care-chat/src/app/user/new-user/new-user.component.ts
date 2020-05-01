@@ -11,6 +11,8 @@ export class NewUserComponent implements OnInit {
 
   user: UserModel = new UserModel();
   loading = false;
+  successMessage="";
+  errorMessage="";
   constructor(private service: UserService) { }
 
   ngOnInit(): void {
@@ -20,7 +22,15 @@ export class NewUserComponent implements OnInit {
     this.loading = true;
     this.service.save(this.user).subscribe(ret=>{
       this.loading = false;
-    });
+      this.successMessage="Usuário cadastrado com sucesso!"
+      this.errorMessage = "";
+      this.user = new UserModel();
+    },
+    (error)=> {
+      this.successMessage=""
+      this.errorMessage = "Ocorreu um Erro. Verifique os dados e tente novamente.";
+    })
+    ;
   }
 
 }
