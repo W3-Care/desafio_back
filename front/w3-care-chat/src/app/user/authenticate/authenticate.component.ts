@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class AuthenticateComponent implements OnInit {
   loading= false;
   constructor(private service: UserService, private router: Router) { }
-  email: string;
-  password: string;
+  email: string = 'bernardo@patient.com';
+  password: string = '123456';
   error = '';
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class AuthenticateComponent implements OnInit {
     .subscribe(
         data => {
           this.loading=false;
-            this.router.navigate(['/chat']);
+          this.router.navigate(['/chat']);
         },
         error => {
             this.error = error;

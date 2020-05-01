@@ -1,9 +1,12 @@
+import { UserModel } from './user.model';
+
 export class Message {
-    id: string;
+    user: UserModel;
     body: string;
-    roomId = 1;
-    constructor(id,body) {
-        this.id = id;
+    roomId: number;
+    constructor(user,body, roomId) {
+        this.user = user;
         this.body = body;
+        this.roomId = roomId;
     }
 }

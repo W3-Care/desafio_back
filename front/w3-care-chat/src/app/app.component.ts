@@ -14,16 +14,5 @@ export class AppComponent {
   
   constructor(private chatService: MessageService) {
   }
-  sendMessage() {
-    this.chatService.sendMessage(new Message(this.id, this.newMessage));
-    this.newMessage = '';
-  }
-  ngOnInit() {
-    this.chatService
-      .getMessages()
-      .subscribe((message: string) => {
-        console.log(message);
-        this.messageList.push(message);
-      });
-  }
+  
 }

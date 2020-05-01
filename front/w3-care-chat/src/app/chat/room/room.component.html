@@ -1,1 +1,22 @@
-<p>room works!</p>
+<div *ngIf="currentUser.type === 'DOCTOR' && status !== 'IN_EXECUTION'">
+    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="startNewRoom()">Iniciar Atendimento</button>
+</div>
+
+<div *ngIf="status == 'IN_EXECUTION'">
+
+    <div *ngFor="let message of messageList">
+        <p>
+            <strong>
+                {{message.user.nome}}: 
+            </strong><span>{{message.body}}</span>
+        </p>
+    </div>
+    
+    <input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" />
+    <button (click)="sendMessage()">Send Message</button>
+</div>
+
+
+<div *ngIf="currentUser.type === 'PATIENT' && status !== 'IN_EXECUTION'">
+    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="registerAsPatient()">Entrar na fila de atendimento</button>
+</div>

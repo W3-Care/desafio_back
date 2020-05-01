@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { Message } from '../models/message.model';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  constructor(private socket: Socket) { }
+  constructor(private socket: Socket, private userService: UserService) { }
 
   public sendMessage(message: Message) {
     this.socket.emit('new-message', message);
@@ -21,4 +22,27 @@ public getMessages = () => {
   });
 }
 
+public createAndJoinRoom(room) {
+  this.socket.emit('new-room', room);
+  return Observable.create((observer) => {
+    this.socket.on('new-room', (message) => {
+      this.socket.emit('join-room', room);
+      console.log(message)
+        observer.next(message);
+    });
+});
+}
+
+public waitAndJoinRoom(room) {
+  this.socket.emit('wait-room', room);
+  return Observable.create((observer) => {
+    this.socket.on('new-room', (message) => {
+      console.log(message)
+      if(message === this.userService.currentUserValue.id) {
+        this.socket.emit('join-room', room);
+        observer.next(message);
+      }
+    });
+});
+}
 }
