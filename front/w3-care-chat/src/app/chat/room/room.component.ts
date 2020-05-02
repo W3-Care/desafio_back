@@ -15,7 +15,7 @@ export class RoomComponent implements OnInit {
   currentUser: UserModel;
   status: String = `WAITING`;
   messageList: string[] = [];
-  newMessage: string;
+  newMessageText: string;
   roomId: number;
   queue: any;
   infoMessage: String;
@@ -24,7 +24,15 @@ export class RoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.service.currentUserValue;
-    this.registerAsPatient();
+    console.log(this.currentUser.type);
+    if (this.currentUser.type === 'PATIENT') {
+      this.registerAsPatient();
+    }
+    this.messageService
+    .getMessages()
+    .subscribe((message: string) => {
+      this.messageList.push(message);
+    });
   }
 
   startNewRoom(): void {
@@ -35,11 +43,6 @@ export class RoomComponent implements OnInit {
       this.messageService.createAndJoinRoom(queue.body.patient.id).subscribe(message=>{
         this.roomId = message;
         this.status = 'IN_EXECUTION';
-        this.messageService
-      .getMessages()
-      .subscribe((message: string) => {
-        this.messageList.push(message);
-      });
       })
       this.messageService.waitForCloseRoom(queue.body.patient.id).subscribe(data=>{
         this.status = 'DONE';
@@ -58,27 +61,23 @@ export class RoomComponent implements OnInit {
       this.messageService.waitAndJoinRoom(this.currentUser.id).subscribe(message=>{
         this.status = 'IN_EXECUTION';
         this.roomId = message;
-        this.messageService
-      .getMessages()
-      .subscribe((message: string) => {
-        this.messageList.push(message);
-      });
-      });
+    });
 
-      this.messageService.waitForCloseRoom(this.currentUser.id).subscribe(data=>{
-        this.status = 'DONE';
+    this.messageService.waitForCloseRoom(this.currentUser.id).subscribe(data=>{
+      this.status = 'DONE';
       });
     });
 ;
   }
 
   sendMessage() {
-    this.messageService.sendMessage(new Message(this.currentUser, this.newMessage, this.roomId));
-    this.newMessage = '';
-    this.status = 'DONE';
+    console.log(1)
+    this.messageService.sendMessage(new Message(this.currentUser, this.newMessageText, this.roomId));
+    this.newMessageText = '';
   }
 
   finish() {
+    this.messageList = [];
     this.queueService.finishMedicalCare(this.queue.id).subscribe((data)=>{
       this.messageService.closeRoom(this.roomId);
     })

@@ -11,10 +11,11 @@ export class MessageService {
   constructor(private socket: Socket, private userService: UserService) { }
 
   public sendMessage(message: Message) {
+    console.log(2);
     this.socket.emit('new-message', message);
 }
 
-public getMessages = () => {
+public getMessages(): Observable<any> {
   return Observable.create((observer) => {
           this.socket.on('new-message', (message) => {
               observer.next(message);

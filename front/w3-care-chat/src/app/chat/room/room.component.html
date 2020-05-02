@@ -2,7 +2,7 @@
 <h3 class=" text-center">{{currentUser.name}}</h3>
 <div class="alert alert-info" *ngIf="infoMessage">{{infoMessage}}</div>
 <div *ngIf="currentUser.type === 'DOCTOR' && status !== 'IN_EXECUTION'">
-    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="startNewRoom()">Iniciar Atendimento</button>
+    <button class="btn btn-success btn-lg btn-block" type="submit" (click)="startNewRoom()">Iniciar Próximo Atendimento</button>
 </div>
 
 <div >
@@ -14,8 +14,6 @@
             </strong><span></span>
         </p>
     </div>
-
-
     <div class="messaging" *ngIf="status == 'IN_EXECUTION'">
         <div class="inbox_msg">        
           <div class="mesgs">
@@ -23,18 +21,17 @@
               <div class="incoming_msg">
                   <div class="received_msg"  *ngFor="let message of messageList">
                       <div class="alert" [ngClass]="{'received_msg': message.user.id !== currentUser.id, 'outgoing_msg': message.user.id === currentUser.id, 'alert-info': message.user.id !== currentUser.id, 'alert-success': message.user.id === currentUser.id}">
-                    <!-- <span class="incoming_msg_img"> <img src="assets/noun_Patient_848681.png" alt="sunil"> </span> -->
-                    <p>{{message.body}} {{message.user.id !== currentUser.id}}</p>
+                    <p>{{message.body}}</p>
                 </div>
               </div>
             </div>
         </div>
-                    <div class="type_msg">
-                      <div class="input_msg_write">
-                        <input type="text"  [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" class="write_msg" placeholder="Digite sua mensagem" />
-                        <button  (click)="sendMessage()" class="btn btn-sm btn-success" type="button">Enviar</button>
-                      </div>
-                    </div>
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <input type="text"  [(ngModel)]="newMessageText" (keyup)="$event.keyCode == 13 && sendMessage()" class="write_msg" placeholder="Digite sua mensagem" />
+            <button  (click)="sendMessage()" class="btn btn-sm btn-success" type="button">Enviar</button>
+          </div>
+        </div>
       </div>
   </div>
   <button class="btn btn-danger btn-lg btn-block" type="submit" (click)="finish()">Encerrar atendimento</button>
