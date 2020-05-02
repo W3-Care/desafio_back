@@ -11,10 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @EnableSpringDataWebSupport
 @EnableWebMvc
-public class CompanyPropertyApi {
+public class UserApi {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CompanyPropertyApi.class, args);
+		SpringApplication.run(UserApi.class, args);
 	}
 
 	@Bean

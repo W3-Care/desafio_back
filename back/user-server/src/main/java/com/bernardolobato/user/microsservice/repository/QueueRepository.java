@@ -7,5 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface QueueRepository extends JpaRepository<ChatQueue, Long> {
 
 
-    public ChatQueue findFirstByStatus(QueueStatus status);
+    public ChatQueue findFirstByStatusOrderById(QueueStatus status);
+
+    public ChatQueue findFirstByPatientIdAndStatus(Long patientId, QueueStatus status);
+
 }

@@ -34,7 +34,7 @@
         </div>
       </div>
   </div>
-  <button class="btn btn-danger btn-lg btn-block" type="submit" (click)="finish()">Encerrar atendimento</button>
+  <button *ngIf="currentUser.type === 'DOCTOR'" class="btn btn-danger btn-lg btn-block" type="submit" (click)="finish()">Encerrar atendimento</button>
 
 </div>
 

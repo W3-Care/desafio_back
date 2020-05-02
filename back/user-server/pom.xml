@@ -10,10 +10,10 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bernardolobato</groupId>
-	<artifactId>source2it-api</artifactId>
+	<artifactId>w3-care-user-api</artifactId>
 	<version>1.0</version>
-	<name>Source2IT Api Exam</name>
-	<description>Api exam to Source2IT</description>
+	<name>w3.care user api</name>
+	<description>w3.care user api</description>
 
 	<properties>
 		<java.version>1.8</java.version>

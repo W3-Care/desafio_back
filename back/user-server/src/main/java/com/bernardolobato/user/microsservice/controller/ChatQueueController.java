@@ -27,18 +27,21 @@ public class ChatQueueController {
     UserRepository userRepository;
 
     @PostMapping("/")
-public ResponseEntity<?> salvar(@Valid @RequestBody QueueForm queueForm) {
+public ResponseEntity<?> push(@Valid @RequestBody QueueForm queueForm) {
         try {
-            ChatQueue c = new ChatQueue();
-            Optional<User> u = userRepository.findById(queueForm.getPatientId());
-            if (u.isPresent()) {
-                c.setPatient(u.get());
-                c.setStatus(QueueStatus.WAITING);
-                c = this.queueRepository.save(c);
-                return ResponseEntity.ok().body(c);
-            } else {
-                return ResponseEntity.notFound().build();
+            ChatQueue c = this.queueRepository.findFirstByPatientIdAndStatus(queueForm.getPatientId(), QueueStatus.WAITING);
+            if (c == null) {
+                c = new ChatQueue();
+                Optional<User> u = userRepository.findById(queueForm.getPatientId());
+                if (u.isPresent()) {
+                    c.setPatient(u.get());
+                    c.setStatus(QueueStatus.WAITING);
+                    c = this.queueRepository.save(c);
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
             }
+            return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             System.err.println(e);
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -49,7 +52,7 @@ public ResponseEntity<?> salvar(@Valid @RequestBody QueueForm queueForm) {
     @PostMapping("/pull")
     public ResponseEntity<?> pull(@Valid @RequestBody QueueForm queueForm) {
             try {
-                ChatQueue c = this.queueRepository.findFirstByStatus(QueueStatus.WAITING);
+                ChatQueue c = this.queueRepository.findFirstByStatusOrderById(QueueStatus.WAITING);
                 if (c == null){
                     return ResponseEntity.notFound().build();
                 }
