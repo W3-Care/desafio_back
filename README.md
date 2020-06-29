@@ -1,4 +1,4 @@
-![W3Care](https://w3.care/assets/images/w3care-logo-4.svg)
+![W3Care](https://w3.care/wp-content/uploads/2020/05/w3care-logo.png)
 
 # Desafio Backend
 Com grandes poderes, vem grandes chocolates suíços... ou alguma coisa assim...
